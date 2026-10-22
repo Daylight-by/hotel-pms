@@ -1,0 +1,1 @@
+import{t as e}from"./axios--KzDNHNF.js";var t=async()=>await e.get({url:`/hotel/audit/business-date`}),n=async()=>await e.post({url:`/hotel/audit/run`}),r=async t=>await e.get({url:`/hotel/audit/page`,params:t});export{r as n,n as r,t};

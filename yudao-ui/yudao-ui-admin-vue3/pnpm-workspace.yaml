@@ -1,0 +1,11 @@
+# 本机没有符号链接权限（SeCreateSymbolicLinkPrivilege 需要管理员），
+# pnpm 默认的 isolated 布局会静默失败、只建出空的 @scope 目录，导致 vite 找不到。
+# 因此改用 hoisted 扁平布局：node_modules 里全是真实目录，不依赖任何链接。
+nodeLinker: hoisted
+
+# 这些依赖需要执行 postinstall 才能落地平台二进制，默认被 pnpm 忽略。
+allowBuilds:
+  '@parcel/watcher': true
+  core-js-pure: true
+  es5-ext: true
+  esbuild: true

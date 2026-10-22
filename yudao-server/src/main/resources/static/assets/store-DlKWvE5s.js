@@ -1,0 +1,1 @@
+import{t as e}from"./axios--KzDNHNF.js";var t=async()=>await e.get({url:`/hotel/store/list`}),n=async t=>await e.get({url:`/hotel/store/page`,params:t}),r=async t=>await e.post({url:`/hotel/store/create`,data:t}),i=async t=>await e.put({url:`/hotel/store/update`,data:t}),a=async t=>await e.delete({url:`/hotel/store/delete?id=`+t});export{i as a,n as i,a as n,t as r,r as t};

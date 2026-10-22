@@ -1,0 +1,1 @@
+import{Fi as e}from"./form-create-6sasZ53Q.js";import{t}from"./Icon-BS2da1PX.js";import"./index-CF2YcP3r.js";var n=n=>e(t,n);export{n as t};

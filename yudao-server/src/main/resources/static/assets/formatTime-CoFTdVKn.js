@@ -1,0 +1,1 @@
+import{i as e}from"./rolldown-runtime-aKtaBQYM.js";import{K as t}from"./form-create-6sasZ53Q.js";var n=e(t());function r(e,t){return e&&e?(0,n.default)(e).format(t??`YYYY-MM-DD HH:mm:ss`):``}function i(e,t,n){return n?r(n):``}export{r as n,i as t};

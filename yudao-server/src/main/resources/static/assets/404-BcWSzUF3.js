@@ -1,0 +1,1 @@
+import{Ei as e,Ji as t,Mi as n,Ta as r}from"./form-create-6sasZ53Q.js";import{_ as i}from"./useApi-DtucMc-S-YlwWHvyb.js";import{t as a}from"./Error-lPEX8kXt.js";var o=n({name:`Error404`,__name:`404`,setup(n){let{push:o}=i();return(n,i)=>{let s=a;return t(),e(s,{onErrorClick:i[0]||=e=>r(o)(`/`)})}}});export{o as default};

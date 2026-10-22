@@ -1,0 +1,34 @@
+# ============================================================
+# T2 收钱与客（在线支付 / 会员 / 自助入住退房 / 发票申请）配置
+#
+# 说明：
+# 1. 本文件是 T2 的独立配置文件，未修改公共的 application.yaml / application-local.yaml。
+# 2. 代码里的默认值与下面一致，因此不激活本 profile 也能跑（Mock 支付默认开启）。
+# 3. 需要显式启用时：启动参数加 --spring.profiles.active=hotel-t2
+#    或由派发者把 hotel.* 段落合并进 application.yaml。
+# ============================================================
+hotel:
+  pay:
+    # 演示环境一键模拟支付：POST /app-api/hotel/pay/mock-success
+    # 没有企业主体、拿不到真实商户号，答辩必须靠它演示收款闭环
+    mock-enabled: true
+    # 支付单有效期（分钟），超时未支付由订单侧关单
+    timeout-minutes: 30
+    # 支付回调地址（真实接入时需公网可访问）
+    notify-url: http://localhost:48082/app-api/hotel/pay/notify/wxpay
+    wxpay:
+      app-id: ''
+      mch-id: ''
+      api-v3-key: ''
+      cert-serial-no: ''
+    alipay:
+      app-id: ''
+      private-key: ''
+      public-key: ''
+  member:
+    # 每消费 1 元累计的积分（默认 1 分），退款按同比例扣回（type=40）
+    points-per-yuan: 1
+    # 演示环境短信验证码（未接入真实短信通道时固定值）
+    demo-sms-code: '123456'
+    # 会员令牌使用的 OAuth2 客户端（默认复用系统内置 default 客户端）
+    token-client-id: default

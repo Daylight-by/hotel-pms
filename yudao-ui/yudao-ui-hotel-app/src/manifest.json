@@ -1,0 +1,27 @@
+{
+  "name": "栖屿酒店",
+  "appid": "",
+  "description": "酒店 PMS C 端在线预订（H5 + 微信小程序）",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "h5": {
+    "title": "栖屿酒店 · 在线预订",
+    "router": {
+      "mode": "hash",
+      "base": "./"
+    }
+  },
+  "mp-weixin": {
+    "appid": "touristappid",
+    "setting": {
+      "urlCheck": false,
+      "es6": true,
+      "minified": true,
+      "postcss": true
+    },
+    "usingComponents": true,
+    "lazyCodeLoading": "requiredComponents"
+  },
+  "vueVersion": "3"
+}

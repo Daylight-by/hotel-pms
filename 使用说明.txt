@@ -1,0 +1,119 @@
+来财酒店 PMS —— 运行说明
+========================================
+
+一、项目简介
+
+来财酒店 PMS 是一套面向中小型酒店的轻量级管理系统，覆盖房态管理、
+预订与入住、账务结算、夜审与营业日推进、收益定价、经营报表等完整
+业务流程，并支持多门店数据隔离、协议单位挂账、公安上传 / 门锁 /
+OTA 渠道对接。
+
+技术栈：Spring Boot 3.5 + Vue 3 + MySQL + Redis
+
+
+二、运行环境
+
+必需：
+  JDK      17 或以上
+  MySQL    8.0 以上
+  Redis    5.0 以上
+
+可选：
+  Maven    3.8 以上
+
+
+三、启动步骤（共三步）
+
+────────────────────────────────
+第 1 步：导入数据库（只需做一次）
+────────────────────────────────
+
+按 Win+R，输入 cmd 回车，在项目根目录下执行
+（把 123456 换成你的 MySQL 密码）：
+
+    mysql -uroot -p123456 -e "CREATE DATABASE `ruoyi-vue-pro` DEFAULT CHARACTER SET utf8mb4"
+    mysql -uroot -p123456 ruoyi-vue-pro < sql\数据库备份-20261021.sql
+
+说明：备份文件已包含全部 86 张表和演示数据，
+      无需再执行 mysql 目录下的其他脚本。
+
+────────────────────────────────
+第 2 步：启动
+────────────────────────────────
+
+把「一键启动.bat」放在项目根目录（和 pom.xml 同一层），双击运行。
+
+脚本会自动完成六件事：
+  1. 检查 Java 环境
+  2. 启动 MySQL（未运行时尝试启动服务）
+  3. 启动 Redis（自动查找并启动）
+  4. 检查系统程序（未提供编译好的程序时，会用 Maven 自动编译）
+  5. 启动系统并等待就绪
+  6. 自动打开浏览器
+
+首次启动约需 60 秒。若中途提示某个服务未就绪，
+按提示手动启动后，回到脚本窗口按任意键继续即可。
+
+────────────────────────────────
+第 3 步：登录
+────────────────────────────────
+
+浏览器会自动打开 http://localhost:48080
+如果没有自动打开，手动在浏览器输入该地址。
+
+  租户：来财酒店
+  账号：admin
+  密码：admin123
+
+
+四、常见问题
+
+Q1 提示「没有找到 Java」
+   安装 JDK 21（https://adoptium.net/，选 Temurin 21 的 Windows x64 msi），
+   安装时勾选 "Set JAVA_HOME variable"，装完重新双击脚本。
+
+Q2 提示「MySQL 没起来」
+   按 Win+R 输入 services.msc，在列表中找到 MySQL 服务，右键启动。
+
+Q3 提示「没找到 Redis」
+   两个办法：
+   ① 手动打开 Redis 文件夹，双击 redis-server.exe，看到
+      "ready to accept connections" 后回到脚本窗口按任意键；
+   ② 把 Redis 文件夹复制到项目目录下并改名为 redis，脚本会自动找到。
+
+Q4 登录提示账号或密码错误
+   确认「租户」一栏填写的是「来财酒店」，不是其他名称。
+
+Q5 浏览器打开是空白
+   后端还在启动。等 60 秒后刷新页面即可（看 PMS-Server 窗口是否
+   出现 "Started YudaoServerApplication"）。
+
+Q6 数据库连接失败 / Access denied
+   MySQL 密码与程序内配置不一致。系统默认使用密码 123456。
+   如实际密码不同，需修改
+   yudao-server/src/main/resources/application-local.yaml
+
+
+五、目录说明
+
+  yudao-module-hotel/      酒店业务模块（本项目主要开发）
+  yudao-module-system/     系统模块（用户、角色、菜单）
+  yudao-module-infra/      基础设施模块
+  yudao-framework/         框架层
+  yudao-server/            启动模块与配置文件
+  yudao-ui/                前端源码
+    ├─ yudao-ui-admin-vue3/    管理端（Vue3）
+    └─ yudao-ui-hotel-app/     C 端（uni-app）
+  sql/
+    ├─ mysql/                  各阶段建表脚本（过程留档）
+    └─ 数据库备份-20261021.sql   整库备份，含演示数据
+  一键启动.bat             启动脚本
+  yudao-server.jar         编译好的程序
+
+六、技术信息
+
+  后端框架    Spring Boot 3.5.15、MyBatis-Plus、Sa-Token、Redisson
+  前端框架    Vue 3.5.34、Element Plus 2.13.7、Vite 8.1.4
+  数据库      MySQL 8 / MariaDB，字符集 utf8mb4
+  服务端口    48080（前后端同端口，前端已打包进程序）
+  演示数据    6 个月经营数据：订单、账页、支付流水、审计日志、2 家门店等
